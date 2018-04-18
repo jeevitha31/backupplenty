@@ -111,19 +111,6 @@ class PaymentController extends Controller
     {
         $requestData = $this->request->all();
         $this->getLogger(__METHOD__)->error('ExecutePayment response.', $requestData);
-	    $this->getLogger(__METHOD__)->error('testmode', $requestData['testmode']);
-	   $this->getLogger(__METHOD__)->error('cptoken', $requestData['cp_checkout_token']);
-	 $this->sessionStorage->getPlugin()->setValue('testmode',$this->paymentService->getBarzhalenTestMode($requestData['test_mode']));
-	 	$test= $this->sessionStorage->getPlugin()->getValue('testmode'); 
-		 $this->getLogger(__METHOD__)->error('sessiontestmode', $test);
-        
-        if($requestData['payment_type'] == 'CASHPAYMENT' && !empty($requestData['cp_checkout_token']))
-			{
-				$this->sessionStorage->getPlugin()->setValue('tokenval',$requestData['cp_checkout_token']);
-				$this->sessionStorage->getPlugin()->setValue('testmode',$this->paymentService->getBarzhalenTestMode($requestData['test_mode']));
-				$this->getLogger(__METHOD__)->error('Barzhalen paymet token', $requestData['cp_checkout_token']);
-			}
-        
         $requestData['payment_id'] = (!empty($requestData['payment_id'])) ? $requestData['payment_id'] : $requestData['key'];
 
 		$this->getLogger(__METHOD__)->error('ExecutePayment response1.', $requestData['payment_id']);
