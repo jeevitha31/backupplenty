@@ -42,7 +42,7 @@ class NovalnetOrderConfirmationDataProvider
         $PaymentRepositoryContract = pluginApp(PaymentRepositoryContract::class);
         $sessionStorage = pluginApp(FrontendSessionStorageFactoryContract::class);
         $sessionStorage->getPlugin()->setValue('token','tokenvalue');
-        $var = (string)$sessionStorage->getPlugin()->getValue('cashtoken');
+        $barzahlentoken = (string)$sessionStorage->getPlugin()->getValue('cashtoken');
 	$testmode = (string)$sessionStorage->getPlugin()->getValue('testmode');
        
         
@@ -77,7 +77,7 @@ class NovalnetOrderConfirmationDataProvider
 
  		$payment_type = (string)$paymentHelper->getPaymentKeyByMop($property->value);
 
-                return $twig->render('Novalnet::NovalnetOrderHistory', ['comments' => html_entity_decode($comment),'tokenval' => html_entity_decode($var),'payment_type' => html_entity_decode($payment_type),'testmode' => html_entity_decode($testmode)]);
+                return $twig->render('Novalnet::NovalnetOrderHistory', ['comments' => html_entity_decode($comment),'tokenval' => html_entity_decode($barzahlentoken),'payment_type' => html_entity_decode($payment_type),'testmode' => html_entity_decode($testmode)]);
             }
         }
     }
