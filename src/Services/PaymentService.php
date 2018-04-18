@@ -169,8 +169,8 @@ class PaymentService
 					$this->getLogger(__METHOD__)->error('validate response.', $requestData);
 					if($requestData['payment_type'] == 'CASHPAYMENT' && !empty($requestData['cp_checkout_token']))
 						{
-							$this->sessionStorage->getPlugin()->setValue('tokenval',$requestData['cp_checkout_token']);
-							$this->sessionStorage->getPlugin()->setValue('testmode',$this->getBarzhalenTestMode($requestData['test_mode']));
+							$this->sessionStorage->getPlugin()->setValue('barzhalentoken',$requestData['cp_checkout_token']);
+							$this->sessionStorage->getPlugin()->setValue('barzhalentestmode',$this->getBarzhalenTestMode($requestData['test_mode']));
 							$this->getLogger(__METHOD__)->error('Barzhalen paymet token', $requestData['cp_checkout_token']);
 						}
         
@@ -624,11 +624,19 @@ class PaymentService
         return $payment[$paymentKey];
     }
     
-    public function getBarzhalenTestMode($type)
+    
+    /**
+    * Get the Payment process URL by using Testmode
+    *
+    * @param string $type
+    * @return string
+    */
+    public function getBarzhalenTestMode($testmode)
     {
 		$testmode = [
-		'0'=>'https://cdn.barzahlen.de/js/v2/checkout.js',
-		'1'=>'https://cdn.barzahlen.de/js/v2/checkout-sandbox.js'
+		'0'=>NovalnetConstants::BARZAHLEN_LIVEURL,
+		'1'=>NovalnetConstants::BARZAHLEN_TESTURL
+		
 		];
 	
 		return $testmode[$type];
