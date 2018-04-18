@@ -630,7 +630,7 @@ class PaymentService
     * @param string $type
     * @return string
     */
-    public function getBarzhalenTestMode($testmode)
+    public function getBarzhalenTestMode($response)
     {
 		$testmode = [
 		'0'=>NovalnetConstants::BARZAHLEN_LIVEURL,
@@ -638,7 +638,7 @@ class PaymentService
 		
 		];
 	
-		return $testmode[$type];
+		return $testmode[$response];
 	}
 
 
