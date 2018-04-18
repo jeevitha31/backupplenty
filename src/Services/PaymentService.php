@@ -174,7 +174,6 @@ class PaymentService
 							$this->getLogger(__METHOD__)->error('Barzhalen paymet token', $requestData['cp_checkout_token']);
 						}
         
-        
 					 
                     $this->sessionStorage->getPlugin()->setValue('nnPaymentData',null);
                     if(isset($requestData['status']) && in_array($requestData['status'], ['90', '100']))
